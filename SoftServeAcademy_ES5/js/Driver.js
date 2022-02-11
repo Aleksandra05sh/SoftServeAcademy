@@ -4,25 +4,25 @@ function Driver(name, driveExperience) {
   this._name = name;
   this._driveExperience = driveExperience;
   this._car = null;
-};
+}
 
 Driver.prototype.getName = function() {
   return this._name;
-};
+}
 
 Driver.prototype.getDriveExperience = function() {
   return this._driveExperience;
-};
+}
 
 Driver.prototype.setCar = function(car) {
   if (car instanceof Object && '_brand' in car) {
     this._car = car;
   }
-};
+}
 
 Driver.prototype.getCar = function() {
   return this._car;
-};
+}
 
 Driver.prototype.getFullInfo = function() {
   var carInfo;
@@ -32,58 +32,58 @@ Driver.prototype.getFullInfo = function() {
     carInfo = 'not assined';
   }
   return 'Driver name: ' + this._name + '.\nDrive experience: ' + this._driveExperience  + ' year(s).\nCar: ' + carInfo+ '.';
-};
+}
 
 Driver.prototype.startCar = function() {
   this._car.start();
-};
+}
 
 Driver.prototype.stopCar = function() {
   this._car.stop();
-};
+}
 
 Driver.prototype.driveCar = function() {
   this._car.drive();
-};
+}
 
 Driver.prototype.parkingCar = function() {
   this._car.parking();
-};
+}
 
 Driver.prototype.onDeviceByName = function(name){
   var device = this._car.getDeviceByName(name);
   if (device) {
     device.on();
   } 
-};
+}
 
 Driver.prototype.offDeviceByName = function(name){
   var device = this._car.getDeviceByName(name);
   if (device) {
     device.off();
   }
-};
+}
 
 Driver.prototype.increaseVolumeRadio = function(name) {
   var device = this._car.getDeviceByName(name);
   if (device) {
     device.increaseVolume();
   }
-};
+}
 
 Driver.prototype.decreaseVolumeRadio = function(name) {
   var device = this._car.getDeviceByName(name);
   if (device instanceof Radio) {
     device.decreaseVolume();
   }
-};
+}
 
 Driver.prototype.changeRadioStation = function(name) {
   var device = this._car.getDeviceByName(name);
   if (device instanceof Radio) {
     device.changeRadiostation();
   }
-};
+}
 
 Driver.prototype.setRadiostationByFM = function(name, fm) {
   var device = this._car.getDeviceByName(name);
@@ -122,7 +122,7 @@ Driver.prototype.asyncSetRadiostationByFM = function(name, fm, callback) {
     }
     callback (error);
   }.bind(this), 1000);
-};
+}
 
 
 
