@@ -106,7 +106,6 @@ class Driver {
       let error;
       if (device instanceof Radio) {
         const index = device.radiostations.findIndex((rs) => rs.radioFrequency === fm);
-        device.curRadiostationIndex = index;
         if (index < 0) {
           error = new Error('Invalid Parameters: radiostation no exist');
         }
@@ -114,9 +113,26 @@ class Driver {
       } else {
         error = new Error('Invalid Parameters: radio no exist');
       }
-      callback (error);
+      callback(error);
     }, 1000);
   }
 
+  asyncSetRadiostationByFM2(name, fm) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        const device = this._car.getDeviceByName(name);
+        if (device instanceof Radio) {
+          const index = device.radiostations.findIndex((rs) => rs.radioFrequency === fm);
+          if (index < 0) {
+            reject(new Error('Invalid Parameters: radiostation no exist'));
+          }
+          device.curRadiostationIndex = index;
+          resolve();
+        } else {
+          reject(new Error('Invalid Parameters: radio no exist'));
+        }
+      }, 1000);
+    })   
+  }
 }
 

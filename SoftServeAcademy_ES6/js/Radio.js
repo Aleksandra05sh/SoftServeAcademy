@@ -8,7 +8,7 @@ class Radio extends Device {
   }
 
   set curRadiostationIndex(index) {
-    if (index < this._radiostations.length) {
+    if (index < this._radiostations.length && index >= 0) {
       this._curRadiostationIndex = index;
     }
   }

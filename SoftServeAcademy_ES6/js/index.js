@@ -43,7 +43,7 @@ console.log(`Device status after attempt to turn on device (car on stop): ${car.
 //Start car and check voltage supply in the car
 driver.startCar();
 console.log('Voltage supply status, the car is on Start:'); 
-car.devices.forEach(function(el) {
+car.devices.forEach((el) => {
   console.log (`Device name: ${el.name}; device status: ${el.state}; device voltage supply status: ${el.voltageSupply}`);
 }); 
 
@@ -82,24 +82,24 @@ console.dir(`Turn off the car, check isStart: ${driver.car.isStart}`);
 //Check devices: divice status and voltage supply status
 console.log('Divice status and voltage supply status after turning of the car:');
 car.devices.forEach((el) => {
-  console.log (`Device name: ${el.name}; device status: ${el.state}; device voltage supply status: ${el.voltageSupply}`);
+  console.log(`Device name: ${el.name}; device status: ${el.state}; device voltage supply status: ${el.voltageSupply}`);
 });
 
 driver.asyncSetRadiostationByFM('radio1', 107, (error) => {
   if (error) {
     console.log(error.message);
   } else {
-    console.log('Output after the first asynchronous call');
+    console.log('Output after the first asynchronous call: callback');
     driver.asyncSetRadiostationByFM('radio1', 105, (error) => {
       if (error) {
         console.log(error.message);
       } else {
-        console.log('Output after the second asynchronous call');
+        console.log('Output after the second asynchronous call: callback');
         driver.asyncSetRadiostationByFM('radio1', 105, (error) => {
           if (error) {
             console.log(error.message);
           } else {
-            console.log('Output after the third asynchronous call');
+            console.log('Output after the third asynchronous call: callback');
           }
         });
       }
@@ -107,7 +107,33 @@ driver.asyncSetRadiostationByFM('radio1', 107, (error) => {
   } 
 });
 
+driver.asyncSetRadiostationByFM2('radio1', 107)
+.then(() => {
+  console.log('Output after the first asynchronous call: then chain');
+  return driver.asyncSetRadiostationByFM2('radio1', 105);
+})
+.then(() => {
+  console.log('Output after the second asynchronous call: then chain');
+  return driver.asyncSetRadiostationByFM2('radio1', 110);
+})
+.then(() => {
+  console.log('Output after the third asynchronous call: then chain');
+})
+.catch((error) => {
+  console.log(error);
+});
 
+// async function setRadiostationByFM() {
+//   try {
+//     await driver.asyncSetRadiostationByFM2('radio1', 107);
+//     console.log('Output after the first asynchronous call: async');
+//     await driver.asyncSetRadiostationByFM2('radio1', 105);
+//     console.log('Output after the second asynchronous call: async');
+//     await driver.asyncSetRadiostationByFM2('radio1', 110);
+//     console.log('Output after the third asynchronous call: async');
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
-
-
+// setRadiostationByFM();

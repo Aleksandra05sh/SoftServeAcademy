@@ -51,28 +51,28 @@ class Car {
   }
 
   getDeviceByName(name) {
-    return this._devices.find((device) => device._name === name);
+    return this._devices.find((device) => device.name === name);
   }
 
   addDevice(device) {
-    if (!this.getDeviceByName(device._name)) {
+    if (!this.getDeviceByName(device.name)) {
       this._devices.push(device);
     }
   }
 
   removeDeviceByName(name) {
-    const index = this._devices.findIndex((device) => device._name === name);
+    const index = this._devices.findIndex((device) => device.name === name);
     if (index >= 0) {
       this._devices.splice(index, 1);
     }
-  } 
+  }
 
   _offAllDevices() {
     this._devices.forEach((device) => {
       device.voltageSupply = false;
       device.off();
     })
-  } 
+  }
 } 
   
 
